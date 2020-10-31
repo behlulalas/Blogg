@@ -1,0 +1,73 @@
+﻿@model TheBlogger.Models.Post
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="container-fluid">
+        <h2 class="h5 no-margin-bottom">Postlarımıza Hoş Geldiniz</h2>
+    </div>
+</div>
+
+<hr />
+<div class="col-lg-12">
+    <div class="block">
+        <div class="block-body">
+            <h2>Post Sil</h2>
+            <h4>Silmek istediğinize emin misiniz !</h4>
+            <section class="no-padding-top">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Post Başlığı
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.title)
+                                        </dd>
+
+                                        <dt>
+                                            Tarih
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.TimeStamp)
+                                        </dd>
+                                        <dt>
+                                            Post Durumu
+                                        </dt>
+                                        <dd>
+                                            @{
+                                                string PostDurum = "";
+                                                if (Model.PostState == 1)
+                                                {
+                                                    PostDurum = "Onaylandı !";
+                                                }
+                                                else
+                                                {
+                                                    PostDurum = "Onayland Bekliyor !";
+                                                }
+                                            }
+                                            @PostDurum
+                                        </dd>
+                                    </dl>
+
+                                    <form asp-action="Delete">
+                                        <input type="hidden" asp-for="id" />
+                                        <input type="submit" value="Sil" class="btn btn-primary" /> |
+                                        <a asp-action="Index">Geri Dön</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

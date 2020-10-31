@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject SignInManager<IdentityUser> SignInManager
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<IdentityUser> UserManager
+<html lang="en">
+<head>
+    <title>The Blogger</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="The Blogger">
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">
+
+    <link href="~/css/Comments.css" rel="stylesheet" />
+    <!-- FontAwesome JS-->
+    <script defer src="~/assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/assets/css/theme-2.css">
+
+</head>
+
+<body>
+
+    <header class="header text-center">
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="~/Home/Index">The Blogger</a></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a>@User.Identity.Name</a>
+                        <a style="color:aliceblue!important" href="~/Account/Logout">Logout</a>
+                    }
+                    else
+                    {
+                        //
+
+                    }
+                    <hr>
+                </div><!--//profile-section-->
+                <ul class="navbar-nav flex-column text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Home/Index"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Admin/Home"><i class="fas fa-user-astronaut fa-fw mr-2"></i>Admin Paneli <span class="sr-only">(current)</span></a>
+                            </li>
+
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Post/AddPost"><i class="fas fa-plus fa-fw mr-2"></i>Yazı Ekle <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Post/MyPosts"><i class="fas fa-pen-fancy fa-fw mr-2"></i>Yazılarım <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Account/Register"><i class="fas fa-bookmark fa-fw mr-2"></i>Kayıt Ol</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Account/Login"><i class="fas fa-user fa-fw mr-2"></i>Giriş Yap</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    @RenderBody()
+
+
+    <script src="~/assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="~/assets/plugins/popper.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/demo/style-switcher.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.navbar-nav.flex-column.text-left').find('[href="' + window.location.pathname + '"]').parent().addClass('active');
+        });
+    </script>
+</body>
+</html>
+

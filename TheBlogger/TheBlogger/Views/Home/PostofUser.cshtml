@@ -1,0 +1,130 @@
+﻿@model TheBlogger.Models.Post
+@{
+    ViewData["Title"] = "PostofUser";
+
+}
+@{int j = 0;}
+@{int k = 0;}
+@foreach (var c in Model.MainComments)
+{
+    j++;
+    foreach (var sc in c.subComments)
+    {
+        k++;
+    }
+}
+@{
+    int toplamyorum = j + k;
+}
+<div class="main-wrapper">
+    @{
+        string Tarih = Model.TimeStamp.ToShortDateString();
+        string Saat = Model.TimeStamp.ToShortTimeString();
+    }
+    <article class="blog-post px-3 py-5 p-md-5">
+        <div class="container">
+            <header class="blog-post-header">
+                <h2 class="title mb-2">@Html.DisplayFor(model => model.title)</h2>
+                <div class="meta mb-3"><span class="date">Tarih: @Tarih</span><span class="time">Saat: @Saat</span><span class="comment">Yorum (@toplamyorum)<a href="#"></a></span></div>
+            </header>
+
+            <div class="blog-post-body">
+
+                @Html.Raw(Model.content)
+            </div><!--//blog-comments-section-->
+            @{
+
+                await Html.RenderPartialAsync("_CommentAdd", new CommentViewModel() { PostId = Model.id, MainCommentId = 0 });
+
+            }
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="comments">
+                            <div class="comments-details">
+                                <span class="total-comments comments-sort">Yorumlar(@toplamyorum)</span>
+                                <span class="dropdown">
+
+                                </span>
+                            </div>
+
+                            @{int i = 0;}
+                            @foreach (var comment in Model.MainComments)
+                            {
+
+                                <div class="comment-box">
+                                    <span class="commenter-pic">
+                                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-fluid">
+                                    </span>
+                                    <span class="commenter-name">
+                                        @if (comment.UserName == null)
+                                        {
+                                            <a href="#">Misafir</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">@comment.UserName</a>
+                                        } <span class="comment-time">@comment.Created</span>
+                                    </span>
+                                    <p class="comment-txt more">@comment.Message</p>
+
+
+                                    <div class="panel-group" id="accordion_@i">
+                                        <div class="panel panel-default" id="panel_@i">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
+                                                        Yanıtla
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne_@i" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    @{
+                                                        await Html.RenderPartialAsync("_CommentAdd", new CommentViewModel() { PostId = Model.id, MainCommentId = comment.Id });
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @foreach (var item in comment.subComments)
+                                    {
+                                        <div class="comment-box replied">
+                                            <span class="commenter-pic">
+                                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-fluid">
+                                            </span>
+                                            <span class="commenter-name">
+                                                @if (item.UserName == null)
+                                                {
+                                                    <a href="#">Misafir</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#">@item.UserName</a>
+                                                }
+
+                                                <span class="comment-time">@item.Created</span>
+                                            </span>
+                                            <p class="comment-txt more">@item.Message</p>
+
+
+                                        </div>
+                                    }
+
+                                </div>
+                                i++;
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--//container-->
+    </article>
+
+    <!--//promo-section-->
+</div>
+

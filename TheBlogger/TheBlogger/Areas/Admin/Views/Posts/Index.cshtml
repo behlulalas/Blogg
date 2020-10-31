@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TheBlogger.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+    <div class="container-fluid">
+        <h2 class="h5 no-margin-bottom">Postlarımıza Hoş Geldiniz</h2>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="block">
+        <div class="block-body">
+            <section class="no-padding-top">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="block">
+
+                            </div>
+                        </div>
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Post Başlığı
+                                    </th>
+                                    <th>
+                                        İçerik
+                                    </th>
+                                    <th>
+                                        Tarih
+                                    </th>
+                                    <th>
+                                        Post Durumu
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Where(z => z.PostState == 1))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.title)
+                                        </td>
+                                        <td>
+                                            @{
+                                                string icerik = "";
+                                                if (item.content.Length <= 15)
+                                                {
+                                                    icerik = item.content;
+                                                }
+                                                else
+                                                {
+                                                    icerik = item.content.Substring(0, 15);
+                                                }
+                                            }
+                                            @Html.Raw(icerik)...
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TimeStamp)
+                                        </td>
+                                        <td>
+                                            Onaylandı !
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit2" asp-route-id="@item.id">Onay Kaldır</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.id">Sil</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

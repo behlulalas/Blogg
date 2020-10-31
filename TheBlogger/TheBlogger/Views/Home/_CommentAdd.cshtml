@@ -1,0 +1,35 @@
+﻿@model TheBlogger.ViewModel.CommentViewModel
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="comments">
+                <div class="comments-details">
+
+                    <span class="dropdown">
+
+                    </span>
+                </div>
+                <div class="comment-box add-comment">
+                    <span class="commenter-pic">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-fluid">
+                    </span>
+                    <span class="commenter-name">
+                        <form action="~/Post/Comment" method="post">
+                            <input asp-for="PostId" type="hidden">
+                            <input asp-for="MainCommentId" type="hidden">
+                            <input asp-for="Message" type="text" placeholder="Bir yorum yaz">
+                            <input asp-for="UserName" type="hidden">
+
+                            <button type="submit" class="btn btn-primary">Yorum Yap</button>
+                        </form>
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

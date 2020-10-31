@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Blogger | Admin Paneli</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Bootstrap CSS-->
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <link rel="stylesheet" href="~/admin/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="~/admin/css/font.css">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="~/admin/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="~/admin/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <div class="navbar-header">
+                    <!-- Navbar Header--><a href="~/Home/Index" class="navbar-brand">
+                        <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">The</strong><strong>Blogger</strong></div>
+                        <div class="brand-text brand-sm"><strong class="text-primary">T</strong><strong>B</strong></div>
+                    </a>
+                    <!-- Sidebar Toggle Btn-->
+                    <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+                </div>
+                <div class="right-menu list-inline no-margin-bottom">
+
+                    <div class="list-inline-item dropdown">
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <!-- Sidebar Navigation-->
+        <nav id="sidebar">
+            <!-- Sidebar Header-->
+            @using Microsoft.AspNetCore.Identity
+            @using Microsoft.AspNetCore.Authorization
+            @inject IAuthorizationService AuthorizationService
+            @inject SignInManager<IdentityUser>   SignInManager
+
+            @inject UserManager<IdentityUser> UserManager
+
+            @inject RoleManager<IdentityRole> roleManager
+
+
+            @{
+                var userid = UserManager.GetUserId(User);
+
+                IdentityUser user = UserManager.FindByIdAsync(userid).Result;
+
+
+
+            }
+            @if (SignInManager.IsSignedIn(User))
+            {
+
+                <div class="sidebar-header d-flex align-items-center">
+                    <div class="avatar"><img src="~/admin/img/user.png" alt="..." class="img-fluid rounded-circle"></div>
+                    <div class="title">
+                        <h1 class="h5">@user.UserName</h1>
+                        <h5><img src="~/admin/img/admin.png" alt="" height="20" width="20" />Admin </h5>
+                        Tarih : @DateTime.Now.ToShortDateString()
+                    </div>
+                </div>
+            }
+            <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+            <ul class="list-unstyled">
+                <li><a href="~/Admin/Home"> <i class="icon-home"></i>Anasayfa </a></li>
+                <li><a asp-action="Index" asp-controller="Posts"><i class="icon-pencil-case"></i> Onaylanan Postlar</a></li>
+                <li><a asp-action="UnAccepteds" asp-controller="Posts"><i class="icon-controls"></i> Onay Bekleyen Postlar</a></li>
+
+            </ul>
+        </nav>
+        <div class="page-content">
+            <!-- Sidebar Navigation end-->
+            <div>
+                @RenderBody()
+            </div>
+            <footer class="footer">
+                <div class="footer__block block no-margin-bottom">
+                    <div class="container-fluid text-center">
+                        <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                        <p class="no-margin-bottom">2019 &copy; Your company. Design by <a href="https://bootstrapious.com/p/bootstrap-4-dark-admin">Bootstrapious</a>.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript files-->
+    <script src="~/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/admin/vendor/popper.js/umd/popper.min.js"></script>
+    <script src="~/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/admin/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="~/admin/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/admin/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/admin/js/charts-home.js"></script>
+    <script src="~/admin/js/front.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.list-unstyled').find('[href="' + window.location.pathname + '"]').parent().addClass('active');
+        });
+    </script>
+
+</body>
+</html>
