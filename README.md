@@ -32,7 +32,7 @@ SQL Lite
 ## Projenin yapım aşaması
 Öncelikle Visual Studio üzerinden TheBlogger adında boş(empty) bir Asp.Net Core Web Application projesi başlatıyorum.
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/1.png?raw=true)
+![alt text](https://github.com/behlulalas/Blog/blob/main/images/1.png?raw=true)
 
 Bizi yukarıdaki gibi bir bomboş bir çözüm gezgini karşılayacak. Burada NuGet, paket yöneticisi oluyor. NuGet yardımıyla yüklediğimiz paketler NuGet altına yerleşerek projemize dahil oluyor. NuGetten paket yüklemek için proje adına sağ tıklayıp Manage Nuget Packages seçeneğini seçiyoruz. wwwroot klasörü altına js, css dosyalarımız veya kullanıcıdan alacağımız resim, fotoğraf gibi dosyaları koyabiliriz. 2 adet ise cs dosyamız var bunlardan Program.cs bizim main fonksiyonumu içeren sınıfı barındırıyor. Startup.cs ise projemizin ayarlarını yaptığımız sınıfı içeriyor.
 
