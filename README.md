@@ -28,6 +28,9 @@ SQL Lite
 -CommentSection
 -SubCommentSection
 ``` 
+## Proje Demosu:
+
+Demo:http://theblogger.somee.com/
 
 ## Projenin yapım aşaması
 Öncelikle Visual Studio üzerinden TheBlogger adında boş(empty) bir Asp.Net Core Web Application projesi başlatıyorum.
@@ -501,7 +504,7 @@ cshtml dosyaları içerisinde @ işaretini kullanarak c# kodları çalıştırd�
 
 Sonuç ise beklediğim gibi:
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/2.png?raw=true)
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/2.png)
 
 ### Entity Framework Core
 
@@ -671,7 +674,8 @@ add-migration Identity
 update-database
 ```
 komutlarını sırasıyla veriyoruz. Identity yerine istediğiniz başka bir şeyi yazabilirsiniz.
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/3.png?raw=true)
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/3.png)
+
 
 ## Login  -  Register 
 
@@ -1000,7 +1004,8 @@ Startup.cs
 ```
 Böylelikle Giriş yapan kişi eğer admin ise Soldaki menüde admin paneline giden bir link eklenecektir.
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/4.png?raw=true)
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/4.png)
+
 
 -PostAdd
 -PostRemove
@@ -2635,14 +2640,19 @@ UnAceppteds.cshtml
 
 
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/5.png?raw=true)
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/5.png)
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/6.png?raw=true)
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/7.png?raw=true)
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/6.png)
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/8.png?raw=true)
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/9.png?raw=true)
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/7.png)
 
-![alt text](https://github.com/behlulalas/TheBlogger/blob/main/images/10.png?raw=true)
+
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/8.png)
+
+
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/9.png)
+
+
+![Screen](https://github.com/behlulalas/Blogg/blob/master/images/10.png)
